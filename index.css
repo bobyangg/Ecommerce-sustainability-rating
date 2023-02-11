@@ -1,4 +1,41 @@
 body {
-    width: 300px;
+    width: 250px;
     height: 300px;
+    background-color: rgba(179,247,67,0.3);
+   
+}
+
+
+h2 {
+    margin-top: -5px;
+    font-size: 25px;
+    font-family: 'Nunito', sans-serif;
+    color: black;
+    text-align: center;
+}
+.center{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+button {
+    margin-top: 15px;
+    color: black;
+    font-family: 'Nunito', sans-serif;
+    
+
+
+}
+
+p {
+    text-align: center;
+    margin: 30px;
+    padding: -10px;
+    font-size: 40px;
+    font-weight: bold;
+    font-family: 'Nunito', sans-serif;
+    color: black;
+
 }
