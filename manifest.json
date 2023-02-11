@@ -1,0 +1,11 @@
+{
+    "name": "Sustainability rating for ecommerce websites",
+    "version": "1.0.0",
+    "description": "This is an extension to give a rating to ecommerce websites based on how sustainable they are",
+    "manifest_version": 3,
+    "author": "Bob, Max, Erin",
+    "action": {
+        "default_popup": "index.html",
+        "default_title": "Sustainability rating"
+    }
+}
