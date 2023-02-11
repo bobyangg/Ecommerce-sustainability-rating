@@ -15,4 +15,14 @@ async function fetchData(companyName) {
     document.getElementById("ans").innerHTML = record.answer;
 
 }
-fetchData('bp');
+chrome.runtime.onMessage.addListener(
+    function (request, sender, sendResponse) {
+        console.log(sender.tab ?
+            "from a content script:" + sender.tab.url :
+            "from the extension with message" + request.greeting);
+        if (request.greeting != Null)
+            sendResponse({ farewell: "goodbye" });
+        var brand = request.greeting
+        fetchData(brand)
+    }
+);

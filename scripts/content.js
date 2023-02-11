@@ -1,4 +1,3 @@
-// import { fetchData } from script.js
 var brand = document.querySelector("#bylineInfo");
 var brandName = brand.text
 if (brandName.startsWith('Brand: ')) {
@@ -7,4 +6,9 @@ if (brandName.startsWith('Brand: ')) {
     brandName = brandName.slice(10, -5)
 }
 alert(brandName)
-// fetchData(brandName)
+
+var message = (async () => {
+    const response = await chrome.runtime.sendMessage({ greeting: brandName });
+    // do something with response here, not outside the function
+    console.log(response);
+})();
