@@ -12,7 +12,7 @@ async function fetchData(companyName) {
     const res = await fetch('https://you-chat-gpt.p.rapidapi.com/TextOnly', options)
     const record = await res.json()
 
-    document.getElementById("ans").innerHTML = record.answer;
+    return record.answer;
 
 }
 chrome.runtime.onMessage.addListener(
@@ -23,6 +23,10 @@ chrome.runtime.onMessage.addListener(
         if (request.greeting != Null)
             sendResponse({ farewell: "goodbye" });
         var brand = request.greeting
-        fetchData(brand)
+        const gptAns = fetchData(brand)
     }
 );
+
+function display(){
+    document.getElementById("ans").innerHTML = gptAns;
+}
