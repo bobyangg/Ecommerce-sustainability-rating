@@ -7,5 +7,20 @@
     "action": {
         "default_popup": "index.html",
         "default_title": "Sustainability rating"
-    }
+    },
+    "permissions": [
+        "activeTab",
+        "scripting"
+    ],
+    "content_scripts": [
+        {
+            "js": [
+                "scripts/content.js"
+            ],
+            "matches": [
+                "https://www.amazon.ca/*",
+                "https://www.amazon.com/*"
+            ]
+        }
+    ]
 }
