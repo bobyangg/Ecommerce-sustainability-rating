@@ -5,9 +5,10 @@ openai.api_key_path = 'Key'
 model_engine = "davinci"
 
 # Define the prompt to complete
-prompt = "what is the general consumer opinion on <company> on sustainability?"
+
 
 def companySus(value):
+    prompt = "what is the general consumer opinion on <company> on sustainability?"
     # Define the variable to be replaced
     variable = "<company>"
 

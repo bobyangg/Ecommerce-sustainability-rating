@@ -1,32 +1,30 @@
+var susValue;
 function fetchData(companyName) {
-    var serverhost = 'http://127.0.0.1:5000';
-
+    alert('brand got called ' + companyName)
     // Send a POST request to the Flask server
-    fetch("http://localhost:5000/api/sus", {
+    fetch("http://127.0.0.1:5000/api/sus", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
         },
-        body: JSON.stringify({ data: companyName })
+        body: JSON.stringify({ data: companyName }),
     })
         .then(response => response.json())
         .then(data => {
             console.log("Received response from server: ", data);
+            return data['score']
             // Do something with the response, or not
         })
         .catch(error => {
             console.error("Request failed: ", error);
         });
-
-
 }
-var gptAns;
 
 chrome.runtime.onMessage.addListener(
     async function (request, sender, sendResponse) {
         console.log(sender.tab ?
-            "from a content script:" + sender.tab.url + request.greeting :
-            "from the extension with message" + request.greeting);
+            "from a content script:" + sender.tab.url + " " + request.greeting :
+            "from the extension with message " + request.greeting);
         if (request.greeting != null) {
             sendResponse({ farewell: "goodbye" });
         }
@@ -34,12 +32,14 @@ chrome.runtime.onMessage.addListener(
             alert('null');
         }
         var brand = request.greeting
-        gptAns = fetchData(brand)
+        susValue = fetchData(brand)
+
     }
 );
 
-function display() {
-    document.getElementById("ans").innerHTML = gptAns;
+async function display() {
+    alert('displaying')
+    document.getElementById("ans").innerHTML = await susValue;
 }
 
 const rating = 0;

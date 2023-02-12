@@ -3,6 +3,13 @@ import sus
 
 app = Flask(__name__)
 
+@app.after_request
+def after_request(response):
+    response.headers.add('Access-Control-Allow-Origin', '*')
+    response.headers.add('Access-Control-Allow-Headers', 'Content-Type,Authorization')
+    response.headers.add('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS')
+    return response
+    
 @app.route("/api/sus", methods=["POST"])
 def process():
     # Get the data from the request
@@ -11,29 +18,12 @@ def process():
     print("Received data: ", string_data)
 
     # Do something with the data, for example, return two numerical values
-    num1 = 42
-    num2 = 123
-
-    # Return the numerical values in a JSON response
-    response = {
-        "num1": num1,
-        "num2": num2
-    }
-    return jsonify(response)
+    sus_score = sus.susCheck(string_data)
+    return jsonify(sus_score)
 
 if __name__ == "__main__":
     app.run(debug=True)
 
-@app.route("/sus", methods=["GET","POST"])
-def check_sus_score():
-    if request.method == 'POST':
-        input_string = request.data.decode("utf-8")
-    elif request.method == 'GET':
-        input_string = request.args.get('input')
-    if len(input_string) > 100:
-        return "Error: input string length exceeds 100 characters", 400
-    sus_score = sus.susCheck(input_string)
-    return str(sus_score)
 
 @app.route('/')
 def index():
