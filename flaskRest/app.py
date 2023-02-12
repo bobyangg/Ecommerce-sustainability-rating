@@ -1,7 +1,28 @@
-from flask import Flask, request
+from flask import Flask, request, jsonify
 import sus
 
 app = Flask(__name__)
+
+@app.route("/api/sus", methods=["POST"])
+def process():
+    # Get the data from the request
+    data = request.get_json()
+    string_data = data["data"]
+    print("Received data: ", string_data)
+
+    # Do something with the data, for example, return two numerical values
+    num1 = 42
+    num2 = 123
+
+    # Return the numerical values in a JSON response
+    response = {
+        "num1": num1,
+        "num2": num2
+    }
+    return jsonify(response)
+
+if __name__ == "__main__":
+    app.run(debug=True)
 
 @app.route("/sus", methods=["GET","POST"])
 def check_sus_score():
@@ -16,29 +37,8 @@ def check_sus_score():
 
 @app.route('/')
 def index():
-  return 'Hello from Flask!'
+  return 'Hello from Flask! You have landed on the homepage'
 
-
-
-#GET REQUEST
-
-@app.route('/readHello')
-def getRequestHello():
-    return "Hi, I got your GET Request!"
-
-#POST REQUEST
-@app.route('/createHello', methods = ['POST'])
-def postRequestHello():
-    return "I see you sent a POST message :-)"
-#UPDATE REQUEST
-@app.route('/updateHello', methods = ['PUT'])
-def updateRequestHello():
-    return "Sending Hello on an PUT request!"
-
-#DELETE REQUEST
-@app.route('/deleteHello', methods = ['DELETE'])
-def deleteRequestHello():
-    return "Deleting your hard drive.....haha just kidding! I received a     DELETE request!"
 
 if __name__ == "__main__":
     app.run(debug=True)

@@ -1,4 +1,23 @@
 function fetchData(companyName) {
+    var serverhost = 'http://127.0.0.1:5000';
+
+    // Send a POST request to the Flask server
+    fetch("http://localhost:5000/api/sus", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ data: companyName })
+    })
+        .then(response => response.json())
+        .then(data => {
+            console.log("Received response from server: ", data);
+            // Do something with the response, or not
+        })
+        .catch(error => {
+            console.error("Request failed: ", error);
+        });
+
 
 }
 var gptAns;

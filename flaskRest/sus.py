@@ -1,4 +1,7 @@
-def susCheck(input_string):
+from sentimentAnalysis import sa
+from OpenAI import companySus
+def susCheck(company):
     # Your implementation of the SUS score calculation goes here
-    sus_score = 42
+    txt = companySus(company)    
+    sus_score = sa(txt)
     return sus_score
