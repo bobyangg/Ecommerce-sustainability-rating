@@ -38,7 +38,7 @@ button.addEventListener("click", () => {
 });
 
 async function display() {
-    document.getElementById("ans").innerHTML = val;
+    document.getElementById("ans").innerHTML = (val).toFixed(2) + "%";
 }
 
 const rating = 0;

@@ -27,4 +27,5 @@ def companySus(value):
 
     # Get the message
     message = completion.choices[0].text
+    print(message)
     return message
