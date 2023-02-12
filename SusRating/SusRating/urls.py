@@ -15,10 +15,18 @@ Including another URLconf
     cd OneDrive\Documents\GitHub\Ecommerce-sustainability-rating\SusRating
 """
 
-from django.urls import path
-from .views import CompanyList
+# from django.urls import path
+# from SusRating.SusRater.views import CompanyList
 
+
+
+# urlpatterns = [
+#     path('Company/', CompanyList.as_view(), name='Company-list'),
+# ]
+from django.contrib import admin
+from django.urls import include, path
 
 urlpatterns = [
-    path('Company/', CompanyList.as_view(), name='Company-list'),
+    path('admin/', admin.site.urls),
+    path('SusRater/', include("SusRater.urls")) # requests on a route starting with "myapp/" will be forwarded to "myapp.urls"
 ]
