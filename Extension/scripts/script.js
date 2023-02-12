@@ -1,4 +1,5 @@
-var susValue;
+var val;
+var yesResponse = 0;
 function fetchData(companyName) {
     alert('brand got called ' + companyName)
     // Send a POST request to the Flask server
@@ -12,6 +13,8 @@ function fetchData(companyName) {
         .then(response => response.json())
         .then(data => {
             console.log("Received response from server: ", data);
+            yesResponse = 1;
+            val = data['score']
             return data['score']
             // Do something with the response, or not
         })
@@ -32,14 +35,23 @@ chrome.runtime.onMessage.addListener(
             alert('null');
         }
         var brand = request.greeting
-        susValue = fetchData(brand)
+
+        fetchData(brand)
+
+
 
     }
 );
 
+const button = document.getElementById("btn");
+button.addEventListener("click", () => {
+    console.log("Button was clicked!");
+    display()
+});
+
 async function display() {
     alert('displaying')
-    document.getElementById("ans").innerHTML = await susValue;
+    document.getElementById("ans").innerHTML = val;
 }
 
 const rating = 0;

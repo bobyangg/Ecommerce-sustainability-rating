@@ -10,5 +10,7 @@ alert(brandName)
 var message = (async () => {
     const response = await chrome.runtime.sendMessage({ greeting: brandName });
     // do something with response here, not outside the function
+    var some = response
     console.log(response);
+
 })();
