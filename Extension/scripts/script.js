@@ -23,25 +23,13 @@ function fetchData(companyName) {
         });
 }
 
-chrome.runtime.onMessage.addListener(
-    async function (request, sender, sendResponse) {
-        console.log(sender.tab ?
-            "from a content script:" + sender.tab.url + " " + request.greeting :
-            "from the extension with message " + request.greeting);
-        if (request.greeting != null) {
-            sendResponse({ farewell: "goodbye" });
-        }
-        else {
-            alert('null');
-        }
-        var brand = request.greeting
-
-        fetchData(brand)
-
-
-
-    }
-);
+function onOpen() {
+    chrome.storage.local.get('brandName', function (result) {
+        var brandName = result.brandName;
+        fetchData(brandName)
+    });
+}
+window.addEventListener("load", onOpen);
 
 const button = document.getElementById("btn");
 button.addEventListener("click", () => {
@@ -50,7 +38,6 @@ button.addEventListener("click", () => {
 });
 
 async function display() {
-    alert('displaying')
     document.getElementById("ans").innerHTML = val;
 }
 

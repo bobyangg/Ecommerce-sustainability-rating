@@ -7,10 +7,21 @@ if (brandName.startsWith('Brand: ')) {
 }
 alert(brandName)
 
-var message = (async () => {
-    const response = await chrome.runtime.sendMessage({ greeting: brandName });
-    // do something with response here, not outside the function
-    var some = response
-    console.log(response);
 
+var message = (async () => {
+    let response = null;
+    let timeout = setTimeout(() => {
+        console.log("Response not received within time limit");
+    }, 5000); // Timeout after 5 seconds
+
+    while (response === null) {
+        response = await chrome.runtime.sendMessage({ greeting: brandName });
+
+        if (response && response.farewell === "goodbye") {
+            clearTimeout(timeout);
+            break;
+        }
+    }
 })();
+
+
