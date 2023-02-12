@@ -1,24 +1,6 @@
-async function fetchData(companyName) {
-    const options = {
-        method: 'POST',
-        headers: {
-            'content-type': 'application/json',
-            'X-RapidAPI-Key': '65529a08b5msh25845de96de2a6bp1addb5jsn40431c261667',
-            'X-RapidAPI-Host': 'you-chat-gpt.p.rapidapi.com'
-        },
-        body: '{"question":"what is the general consumer opinion on ' + companyName + ' on sustainability?","max_response_time":10}'
-    };
-
-    const res = await fetch('https://you-chat-gpt.p.rapidapi.com/TextOnly', options)
-    alert('first await')
-    const record = await res.json()
-    alert(record.answer);
-    alert(typeof (record.answer))
-    return record.answer;
-
+function fetchData(companyName) {
 
 }
-
 var gptAns;
 
 chrome.runtime.onMessage.addListener(
@@ -33,7 +15,7 @@ chrome.runtime.onMessage.addListener(
             alert('null');
         }
         var brand = request.greeting
-        gptAns = await fetchData(brand)
+        gptAns = fetchData(brand)
     }
 );
 
